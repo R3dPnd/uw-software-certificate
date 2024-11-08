@@ -1,0 +1,45 @@
+1. Design a file compression system where users can select between ZipCompression and RarCompression. Use the Strategy pattern to allow choosing different compression methods.
+# Example usage
+compressor = FileCompressor(ZipCompression())
+compressor.compress_file("document.txt")
+
+compressor = FileCompressor(RarCompression())
+compressor.compress_file("image.jpg")
+The output should be:
+Compressing document.txt using ZIP
+Compressing image.jpg using RAR
+
+2. Create a travel planning system where users can choose between CarTravel, BusTravel, and TrainTravel. Implement the Strategy pattern to allow different travel methods with unique messages.
+# Example usage
+trip = TravelContext(CarTravel())
+trip.plan_trip("New York")
+
+trip = TravelContext(TrainTravel())
+trip.plan_trip("Boston")
+The output should be:
+Traveling to New York by Car
+Traveling to Boston by Train
+
+3. Design a traffic light system with three states: Red, Yellow, and Green. Each state should transition to the next state in a cycle. Implement the State pattern to control the transitions of the traffic light.
+# usage
+light = TrafficLight()
+light.change()  # Red -> Green
+light.change()  # Green -> Yellow
+light.change()  # Yellow -> Red
+The output should be:
+Changing from Red to Green.
+Changing from Green to Yellow.
+Changing from Yellow to Red.
+
+4. Create a document approval process with three states: Draft, Review, and Published. Each state should allow a transition to the next state. Use the State pattern to manage transitions for the document.
+# usage
+document = Document()
+document.proceed()  # Draft -> Review
+document.proceed()  # Review -> Published
+document.proceed()  # Published -> No further transition
+The output should be:
+Document is now under review.
+Document is now published.
+Document is already published. No further changes allowed.
+
+

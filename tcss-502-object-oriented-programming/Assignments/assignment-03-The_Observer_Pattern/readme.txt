@@ -1,0 +1,3 @@
+Preston Harms
+1hr
+No real issues, it was interesting using the ABC library and using the @property annontation. It also took me embarressingly long to figure out that the tester class was not actually calling the method...

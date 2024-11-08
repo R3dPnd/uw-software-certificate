@@ -1,3 +1,11 @@
-# Lecture 1
+# Lecture 4 Stacks and Queues
 
-Zoom Link: <https://washington.zoom.us/rec/play/ILyzbNUisiPLcf9vcARJ50hAxSkuGyG9GQtLZJ6MP2CTnZdYGTIcJuv4uERH1KaqtrnUJrIcnWj--kk7.7aVy56BxSN1thPSC?canPlayFromShare=true&from=my_recording&continueMode=true&componentName=rec-play&originRequestUrl=https%3A%2F%2Fwashington.zoom.us%2Frec%2Fshare%2Fsve8dFMjmxer1XPvMU03EgBkipr0GLjosCFpSnM9R2O0NerAqXTXna5H6b478Hei.S1ddE1qxAzo7pelX>
+## Review
+
+* Linked lists are an implementation of a List interface.
+* Arrays are the primitive implementation that Python does not have. They store a set number of items allocated size at creation time.
+* ArrayLists are actually implementations of dynamic arrays
+
+## Summary
+
+Zoom Link: <>
