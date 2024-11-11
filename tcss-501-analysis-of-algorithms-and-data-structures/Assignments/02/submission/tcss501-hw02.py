@@ -13,8 +13,6 @@ class LinkedList:
 
     def append(self, data):
         n = LinkedList.ListNode(data)
-        char_count = len(data)
-        self.char_count += char_count
 
         if self.first is None:         # Special case for empty lists
             self.first = n
@@ -24,6 +22,7 @@ class LinkedList:
             self.last.next = n    # the old .last needs it's next to point to the new node
             self.last = n         # point the .last node to be the new node.
 
+        self.char_count += len(data)
         self.count += 1
 
     def size(self):
@@ -62,6 +61,7 @@ class LinkedList:
 
         if deleted_fl:
             self.count -= 1
+            self.char_count -= len(data)
 
     def contains(self, data):
         for n in self.iter():
@@ -80,50 +80,45 @@ class LinkedList:
     def clear(self):
         self.first = None
         self.last = None
+        self.char_count = 0
 
 #########################################################
 ####### IMPLEMENT THE FOLLOWING 2 FUNCTIONS  ############
 #########################################################
     def charCount(self, aggregated=False):
-         """ Returns the total number of characters contained in the nodes of the linked list.
-         If the `aggregated' argument is True, the result should be a single integer
-         representing the sum of character counts of all elements in the LinkedList.  If False,
-         the result should be a list of integers representing the count of characters of each
-         node.  In both cases, if the list is empty, return `None'.  The aggregated version of
-         this method should be O(1) and the dis-aggregated version should be O(n).
-
-         :param aggregated: If True, aggregate the counts into a single value. If False, return
-         a list of counts.
-         :return: A single integer or list of integers as described above.
-         """
-         if self.first == None:
+         if self.first is None:
              return None
-         
-         if not aggregated:
-             return self.counts
-         
-         counts = []
-         curr = self.first
-         while curr:
-             counts.append(len(curr.data))
-             curr = curr.next
-         return counts
+         if aggregated:
+             return self.char_count
+         else:
+             curr = self.first
+             count = []
+             while curr:
+                 count.append(len(curr.data))
+                 curr = curr.next
+             return count
 
     def reverse(self, in_place=False):
-        """ Reverses the order of elements of the list, either in place (modifies the existing
-        list) or replicates and returns a new copy of the list.  If in_place==True then
-        modifications should be made to `self'. If in_place==False do not modify self, but
-        rather create a new list and return the new list to the caller.  If the list is empty,
-        in_place==True should do nothing, and in_place==False should return a new empty
-        LinkedList.  Reverse should be no worse than O(n).
-
-        :param in_place: If True, operations are performed on this instantiation of the List.
-        Returns a new reversed version of the list otherwise.
-        :return: If in_place == True, returns None, otherwise returns a new LinkedList object.
-        """
-        
-        pass
-
+        if self is None or self.first is None:
+            return None
+        if in_place:
+            ## REVERSE IN PLACE
+            left = self.first
+            right = self.last
+            for i in range(self.count//2):
+                # swap left and right data
+                temp = left.data
+                left.data = right.data 
+                right.data = temp
+                left = left.next
+                right = right.prev
+        else:
+            curr = self.last
+            reversed_list = LinkedList()
+            while curr:
+                reversed_list.append(curr.data)
+                curr = curr.prev
+            return reversed_list
 
 class Deque:
 ## STUDENT TO RENAME TO class Deque ##
@@ -139,27 +134,24 @@ class Deque:
         self.size = 0
 
     def enqueue(self, data):
-        n = Deque.QueueNode(data)
-        if self.first is None:  # EMPTY
-            self.first = n
-            self.last = n
-        else:
-            self.last.prev = n
-            n.next = self.last
-            self.last = n
-        self.size += 1
+        self.addLast(data)
 
     def dequeue(self):
         ret = self.first
 
+        if self.size < 1:
+            self.first = None
+            self.last = None
+            return None
         if self.size == 1:
             self.first = None
             self.last = None
-        elif self.size > 1:
-            self.first = self.first.prev
-            self.first.next = None
-
-        if self.size >= 1:
+            self.size = 0
+            return ret.data
+        else:
+            next = ret.next
+            self.first = None
+            self.first = next
             self.size -= 1
             return ret.data
 
@@ -172,7 +164,14 @@ class Deque:
         :param data: The data to be contained in the newly created element.
         :return: None
         """
-        pass
+        node = Deque.QueueNode(data)
+        if self.first is None:
+            self.first = node
+            self.last = self.first
+        else:
+            node.next = self.first
+            self.first = node
+        self.size += 1
 
     def addLast(self, data):
         """ Creates a new node at the beginning of the queue, containing the value of data.
@@ -180,16 +179,60 @@ class Deque:
         :param data: The data to be contained in the newly created element.
         :return: None
         """
-        pass
+        node = Deque.QueueNode(data)
+        # check if the first node is empty
+        if self.first is None:
+            self.first = node
+            self.last = self.first
+        # check if the first node is the only node
+        if self.size == 1:
+            self.first.next = node
+            self.last = node
+        else:
+            self.last.next = node
+            self.last = node
+        self.size += 1
 
     def removeFirst(self):
         """ Returns the data of the node that is at the "start" of the Deque.
         :return: The data stored in the node that is at the "start" of the Deque.
         """
-        pass
+        # check if the first node is empty
+        if self.first is None:
+            return None
+        # check if the first node is the only node
+        if self.size == 1:
+            # get the data from the first node
+            data = self.first.data
+            # remove the first node
+            self.first = None
+            self.last = None
+            # decrement the size of the deque
+            self.size = 0
+            # return the data
+            return data
+        # get the data from the first node
+        data = self.first.data
+        # remove the first node
+        self.first = self.first.next
+        # decrement the size of the deque
+        self.size -= 1
+        # return the data
+        return data
 
     def removeLast(self):
         """ Returns the data of the node that is at the "end" of the Deque.
         :return: The data stored in the node that is at the "end" of the Deque.
         """
-        pass
+        if self.first is None:
+            return None
+        if self.size == 1:
+            data = self.first.data
+            self.first = None
+            self.last = None
+            self.size = 0
+            return data
+        data = self.last.data
+        self.last = self.last.prev
+        self.size -= 1
+        return data

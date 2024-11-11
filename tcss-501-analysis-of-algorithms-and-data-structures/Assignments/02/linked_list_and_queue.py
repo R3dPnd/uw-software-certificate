@@ -103,21 +103,22 @@ class LinkedList:
             return None
         if in_place:
             ## REVERSE IN PLACE
-            first = self.first
-            last = self.last
+            left = self.first
+            right = self.last
             for i in range(self.count//2):
-                temp = first.data
-                first.data = last.data 
-                last.data = temp
-                first = first.next
-                last = last.prev
+                # swap left and right data
+                temp = left.data
+                left.data = right.data 
+                right.data = temp
+                left = left.next
+                right = right.prev
         else:
             curr = self.last
             reversed_list = LinkedList()
             while curr:
                 reversed_list.append(curr.data)
                 curr = curr.prev
-            self.first, self.last = reversed_list.first, reversed_list.last
+            return reversed_list
 
 class Deque:
 ## STUDENT TO RENAME TO class Deque ##
@@ -133,27 +134,24 @@ class Deque:
         self.size = 0
 
     def enqueue(self, data):
-        n = Deque.QueueNode(data)
-        if self.first is None:  # EMPTY
-            self.first = n
-            self.last = n
-        else:
-            self.last.prev = n
-            n.next = self.last
-            self.last = n
-        self.size += 1
+        self.addLast(data)
 
     def dequeue(self):
         ret = self.first
 
+        if self.size < 1:
+            self.first = None
+            self.last = None
+            return None
         if self.size == 1:
             self.first = None
             self.last = None
-        elif self.size > 1:
-            self.first = self.first.prev
-            self.first.next = None
-
-        if self.size >= 1:
+            self.size = 0
+            return ret.data
+        else:
+            next = ret.next
+            self.first = None
+            self.first = next
             self.size -= 1
             return ret.data
 
@@ -170,11 +168,9 @@ class Deque:
         if self.first is None:
             self.first = node
             self.last = self.first
-        if self.size == 1:
-            self.first.prev = node
-            self.last = node
-        node.next = self.first
-        self.first = node
+        else:
+            node.next = self.first
+            self.first = node
         self.size += 1
 
     def addLast(self, data):
