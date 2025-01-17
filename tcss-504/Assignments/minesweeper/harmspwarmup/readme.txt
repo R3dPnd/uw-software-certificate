@@ -1,0 +1,3 @@
+- 2hrs
+- had some trouble understanding the formatting in the file
+- Code seems fine given input. I'm sure there are better ways to solve the mie counting portion, but I'm happy it works.
