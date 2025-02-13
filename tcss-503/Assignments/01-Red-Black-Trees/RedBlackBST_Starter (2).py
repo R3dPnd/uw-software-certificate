@@ -39,96 +39,41 @@ class RedBlackBST:
 ### THE FOLLOWING THREE METHOD STUBS REQUIRE COMPLETION FOR ASSIGNMENT
 
     def insert_i(self, key, value):
-        """Insert the provided `value` at the provided `key` in the `RedBlackBST` using an iterative method.
-        Assumes the key provided is a comparable object, and assumes uniqueness. If the `Key` already exists in the
+        """Insert the proper value using an iterative method of traversal.
+        Assumes the key provided is a comparable object, and assumes uniqueness.  If the `Key` already exists in the
         structure, the provided value will overwrite the previous value for this key.
-
         :param key: The unique, comparable object by which to retrieve the desired value.
         :param value: The value in which to store in the `RedBlackBST`
         :return: `None`
         """
-        new_node = RedBlackBST.RedBlackNode(key, value)
 
+        insert_node = RedBlackBST.RedBlackNode(key, value)
+
+        # SPECIAL CASE ROOT IS EMPTY.
         if self.root is None:
-            self.root = new_node
+            self.root = insert_node
             self.root.is_red = False
             return
 
-        current = self.root
-        stack = []
+        # FIND WHERE TO INSERT (TRAVERSING LEFT AND RIGHT)
 
-        while current is not None:
-            stack.append(current)
-            if key < current.key:
-                if current.left is None:
-                    current.left = new_node
-                    new_node.parent = current
-                    break
-                current = current.left
-            elif key > current.key:
-                if current.right is None:
-                    current.right = new_node
-                    new_node.parent = current
-                    break
-                current = current.right
-            else:
-                current.value = value
-                return
+        # ONCE INSERTED, TRAVERSE UP CURR.PARENT
 
-        while stack:
-            node = stack.pop()
-            if self._right_is_red(node) and not self._left_is_red(node):
-                node = self._rotate_left_i(node)
-            if self._left_left_is_red(node):
-                node = self._rotate_right_i(node)
-            if self._left_is_red(node) and self._right_is_red(node):
-                self._flip_colors(node)
-
-        self.root.is_red = False
+        return
 
     def _rotate_left_i(self, node):
-        """Perform a `rotation_left` around the node provided. Return the new root of newly rotated local cluster.
+        """Perform a `rotation_left` around the node provided.  Return the new root of newly rotated local cluster.
         :param node: The node around which to rotate.
         :return: The new root that exists as a result of the rotation.
         """
-        x = node.right
-        node.right = x.left
-        if x.left is not None:
-            x.left.parent = node
-        x.parent = node.parent
-        if node.parent is None:
-            self.root = x
-        elif node == node.parent.left:
-            node.parent.left = x
-        else:
-            node.parent.right = x
-        x.left = node
-        node.parent = x
-        x.is_red = node.is_red
-        node.is_red = True
-        return x
+        return None
 
     def _rotate_right_i(self, node):
-        """Perform a `rotation_right` around the node provided. Return the new root of newly rotated local cluster.
+        """Perform a `rotation_right` around the node provided.  Return the new root of newly rotated local cluster.
         :param node: The node around which to rotate.
         :return: The new root that exists as a result of the rotation.
         """
-        x = node.left
-        node.left = x.right
-        if x.right is not None:
-            x.right.parent = node
-        x.parent = node.parent
-        if node.parent is None:
-            self.root = x
-        elif node == node.parent.right:
-            node.parent.right = x
-        else:
-            node.parent.left = x
-        x.right = node
-        node.parent = x
-        x.is_red = node.is_red
-        node.is_red = True
-        return x
+        return None
 
 ########### THE BELOW METHODS ARE FOR STUDENT USE AND CAN BE USED AS IS IN THE ITERATIVE IMPLEMENTATION
 
@@ -198,6 +143,81 @@ class RedBlackBST:
                 curr = curr.left
             else:
                 curr = curr.right
+
+
+########### THE BELOW SECTION IS ONLY FOR REFERENCE AS A FUNCTIONING RECURSIVE IMPLEMENTATION
+
+    def insert_r(self, key, value):
+        """Insert the provided `value` at the provided `key` in the `RedBlackBST` using a recursive method `_put()`.
+        Assumes the key provided is a comparable object, and assumes uniqueness.  If the `Key` already exists in the
+        structure, the provided value will overwrite the previous value for this key.
+
+        :param key: The unique, comparable object by which to retrieve the desired value.
+        :param value: The value in which to store in the `RedBlackBST`
+        :return: `None`
+        """
+
+        self.root = self._put_r(self.root, key, value)
+        self.root.is_red = False
+
+    def _put_r(self, node, key, value):
+        """A recursive call to insert a new value into the structure using the standard Red-Black insertion rules.
+        Base Case: The Node provided is None, in which case, create a new `RedBlackNode` and return.
+        Recursive Case: If the insertion key is equal to node.key. replace the value and return (special case).  If the
+        insertion key is less than node.key, resurcively _put into node.left, otherwise recursively _put into node.right
+
+        After the base case if found, recursively check for necessary rotations and color flips.
+
+        :param node: The `RedBlackNode` into which a _put is attempted.
+        :param key: The desired key to insert into the `RedBlackBST`
+        :param value: The desired value to store at the provided `key`.
+        :return: Returns the parent node from the level of recursion that has been executed.
+        """
+        if node is None:
+            return RedBlackBST.RedBlackNode(key, value)
+
+        if key < node.key:
+            node.left = self._put_r(node.left, key, value)
+        elif key > node.key:
+            node.right = self._put_r(node.right, key, value)
+        else:
+            node.value = value
+
+        if self._right_is_red(node) and not self._left_is_red(node):
+            node = self._rotate_left_r(node)
+        if self._left_left_is_red(node):
+            node = self._rotate_right_r(node)
+        if self._left_is_red(node) and self._right_is_red(node):
+            self._flip_colors(node)
+
+        return node
+
+    def _rotate_left_r(self, node):
+        """Perform a `rotation_left` around the node provided.  Return the new root of newly rotated local cluster.
+        :param node: The node around which to rotate.  Does NOT manage parent links and cannot be used for iterative
+        insertion method
+        :return: The new root that exists as a result of the rotation.
+        """
+        x = node.right
+        node.right = x.left
+        x.left = node
+        x.is_red = node.is_red
+        node.is_red = True
+        return x
+
+    def _rotate_right_r(self, node):
+        """Perform a `rotation_right` around the node provided.  Return the new root of newly rotated local cluster.
+        :param node: The node around which to rotate.
+        :return: The new root that exists as a result of the rotation.
+        """
+        x = node.left
+        node.left = x.right
+        x.right = node
+        x.is_red = node.is_red
+        node.is_red = True
+        return x
+
+########### END RECURSIVE SECTION
 
 class TestRedBlackBST:
     def __init__(self):
