@@ -51,6 +51,27 @@ def basic_smoke_test():
     print("Second test passed")
 
 ## THE STUDENT SHOULD IMPLEMENT STRASSENS MATRIX MULTIPLICATION ALGORITHM
+'''
+The `strassens` function implements Strassen's algorithm for matrix multiplication, which is an efficient method for multiplying two 
+matrices. The function takes two matrices, `A` and `B`, as input parameters and returns their product. Both matrices are converted to 
+NumPy arrays to facilitate matrix operations.
+
+The function begins by checking if the matrices are of size 1x1, which is the base case. If they are, it simply returns the product of 
+the two single elements. For larger matrices, the function proceeds by dividing each matrix into four quadrants. This is done by 
+calculating the midpoint `n` and slicing the matrices accordingly into `A11`, `A12`, `A21`, `A22` for matrix `A` and `B11`, `B12`, 
+`B21`, `B22` for matrix `B`.
+
+Next, the function recursively computes seven products (`M1` to `M7`) using combinations of these quadrants. These products are 
+essential components of Strassen's algorithm and are calculated using specific combinations of matrix additions and subtractions.
+
+After computing the seven products, the function calculates the four quadrants of the resulting matrix `C` (`C11`, `C12`, `C21`, `C22`) 
+using these products. These quadrants are then combined into a single matrix by horizontally and vertically stacking them using NumPy's
+`hstack` and `vstack` functions.
+
+Finally, the function returns the combined matrix, which is the product of the input matrices `A` and `B`. This implementation of 
+Strassen's algorithm reduces the time complexity of matrix multiplication from O(n^3) to approximately O(n^2.81), making it more 
+efficient for large matrices.
+'''
 def strassens(A, B):
     """
     Uses Strassen’s method for matrix multiplication to return the product of the two

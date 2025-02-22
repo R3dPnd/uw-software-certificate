@@ -1,0 +1,1 @@
+No real issues, but I spent a lot of time doping research on the right approach for AOP programming in Python
