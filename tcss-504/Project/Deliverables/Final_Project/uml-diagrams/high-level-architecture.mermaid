@@ -1,0 +1,46 @@
+
+classDiagram
+    %% High-level architecture overview
+    class DungeonGame {
+        "Main controller"
+        +run()
+    }
+
+    class GameWindow {
+        "UI Components"
+    }
+
+    class Dungeon {
+        "Game world"
+    }
+
+    class Hero {
+        "Player character"
+    }
+
+    class Monster {
+        "Enemies"
+    }
+
+    class CombatSystem {
+        "Battle mechanics"
+    }
+
+    class DungeonFactory {
+        "Dungeon generation"
+    }
+
+    class SqliteConfiguration {
+        "Data persistence"
+    }
+
+    DungeonGame --> GameWindow
+    DungeonGame --> Dungeon
+    DungeonGame --> Hero
+    GameWindow --> CombatSystem
+    Dungeon o-- "many" Room
+    Room o-- "0..1" Monster
+    CombatSystem --> Hero
+    CombatSystem --> Monster
+    DungeonFactory --> Dungeon
+    SqliteConfiguration ..> DungeonGame: "Saves/loads"

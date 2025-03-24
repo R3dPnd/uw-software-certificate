@@ -1,0 +1,76 @@
+classDiagram
+    %% UI system
+    class GameWindow {
+        +screen: pygame.Surface
+        +dungeon: Dungeon
+        +hero: Hero
+        +event_log: EventLog
+        +stats_display: StatsDisplay
+        +minimap: MiniMap
+        +combat_ui: CombatUI
+        +first_person_view: FirstPersonView
+        +in_combat: bool
+        +combat_system: CombatSystem
+        +update(hero)
+        +handle_event(event)
+        +start_combat(hero, monster)
+        +end_combat(victor)
+        +check_victory_condition(hero)
+        +draw(hero)
+    }
+
+    class EventLog {
+        +messages: List~Dict~
+        +scroll_position: int
+        +add_message(text, message_type, is_system)
+        +draw(surface, rect)
+    }
+
+    class StatsDisplay {
+        +warning_flash: bool
+        +draw(surface, rect, hero)
+        +update()
+    }
+
+    class MiniMap {
+        +dungeon: Dungeon
+        +pillar_locations: List
+        +draw(surface, rect, hero_pos)
+    }
+
+    class FirstPersonView {
+        +draw(surface, dungeon, hero_pos, hero_direction)
+        -_draw_corridor(surface)
+        -_draw_doors(surface, room, hero_direction)
+        -_draw_monster(surface, monster)
+        -_draw_pillar(surface, pillar_type)
+        -_draw_item(surface, item_type, pos)
+    }
+
+    class GameMenu {
+        +screen: pygame.Surface
+        +selected_hero: str
+        +player_name: str
+        +selected_difficulty: str
+        +handle_event(event)
+        +draw()
+        +get_game_settings()
+    }
+
+    class GameState {
+        <<enumeration>>
+        MENU
+        PLAYING
+        COMBAT
+        GAME_OVER
+        VICTORY
+    }
+
+    %% Relationships
+    GameWindow o-- EventLog
+    GameWindow o-- StatsDisplay
+    GameWindow o-- MiniMap
+    GameWindow o-- FirstPersonView
+    GameWindow o-- CombatUI
+    GameWindow --> CombatSystem
+    GameWindow --> Dungeon

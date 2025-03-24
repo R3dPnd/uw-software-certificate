@@ -1,0 +1,77 @@
+classDiagram
+    %% Dungeon structure
+    class Dungeon {
+        +size: Tuple~int,int~
+        +maze: List~List~Room~~
+        +entrance: Tuple~int,int~
+        +exit: Tuple~int,int~
+        +reveal_adjacent_rooms(center_pos)
+        +is_room_reachable(start, target): bool
+        +get_room(x, y): Room
+        +move_hero(hero, direction)
+        +apply_room_effects(hero)
+    }
+
+    class Room {
+        +hasPit: bool
+        +hasHealthPot: bool
+        +hasVisionPot: bool
+        +hasPillar: bool
+        +isEntrance: bool
+        +isExit: bool
+        +pillarType: str
+        +doors: Dict~str,bool~
+        +visited: bool
+        +monster: Monster
+        +place_monster(monster)
+        +spawn_monster(force)
+        +get_drops(): List~str~
+        +clear_monster(): List~str~
+    }
+
+    class DungeonFactory {
+        <<abstract>>
+        +create(size): Dungeon
+        +populate_rooms(dungeon)
+        +place_pillars(dungeon)
+        +place_monsters(dungeon)
+        +place_items(dungeon)
+    }
+
+    class DFSDungeonFactory {
+        "Depth-First Search maze generation"
+        +create(size): Dungeon
+        -generate_maze_dfs()
+    }
+
+    class EasyDungeonFactory {
+        "Simpler dungeon layout"
+        +create(size): Dungeon
+        -generate_maze_easy()
+        -ensure_critical_path()
+    }
+
+    class Item {
+        <<abstract>>
+        +name: str
+        +description: str
+    }
+
+    class Potion {
+        <<abstract>>
+        +effect: str
+        +use()
+    }
+
+    class Pillar {
+        "Victory requirement item"
+    }
+
+    Dungeon *-- Room
+    Room --> "0..1" Monster
+    DungeonFactory <|-- DFSDungeonFactory
+    DungeonFactory <|-- EasyDungeonFactory
+    Item <|-- Potion
+    Item <|-- Pillar
+    Potion <|-- HealingPotion
+    Potion <|-- VisionPotion

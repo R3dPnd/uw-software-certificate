@@ -1,0 +1,73 @@
+classDiagram
+    %% Combat system
+    class CombatSystem {
+        +hero: Combatant
+        +monster: Combatant
+        +basic_attack_handler
+        +special_ability_handler
+        +execute_round(use_special, monster_only)
+        +is_combat_over(): bool
+        +get_victor(): Combatant
+    }
+
+    class CombatHandler {
+        <<abstract>>
+        +execute(attacker, defender)
+    }
+
+    class BasicAttackHandler {
+        +execute(attacker, defender)
+    }
+
+    class SpecialAbilityHandler {
+        +execute(attacker, defender)
+    }
+
+    class CombatAction {
+        +actor_name: str
+        +action_type: str
+        +success: bool
+        +damage: int
+        +healing: int
+        +message: str
+    }
+
+    class RoundResult {
+        +actions: List~CombatAction~
+        +hero_damage_taken: int
+        +monster_damage_taken: int
+        +hero_hp: int
+        +monster_hp: int
+    }
+
+    class CombatLogger {
+        +format_round_result(result): List~str~
+    }
+
+    class CombatMenu {
+        +combat: CombatSystem
+        +hero: Hero
+        +monster: Monster
+        +display_status()
+        +display_menu()
+        +handle_choice(choice)
+        +start_combat()
+    }
+
+    class CombatUI {
+        +combat_messages: List~str~
+        +action_buttons: Dict
+        +add_combat_message(message)
+        +draw_combat_screen(screen, hero, monster)
+        +handle_click(pos)
+    }
+
+    CombatHandler <|-- BasicAttackHandler
+    CombatHandler <|-- SpecialAbilityHandler
+    CombatSystem o-- CombatHandler
+    CombatSystem o-- RoundResult
+    RoundResult o-- CombatAction
+    CombatLogger ..> RoundResult
+    CombatMenu --> CombatSystem
+    CombatMenu ..> CombatLogger
+    CombatUI ..> CombatSystem

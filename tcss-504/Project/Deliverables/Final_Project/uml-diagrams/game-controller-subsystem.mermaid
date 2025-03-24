@@ -1,0 +1,60 @@
+classDiagram
+    %% Game controller
+    class DungeonGame {
+        +screen: pygame.Surface
+        +state: GameState
+        +menu: GameMenu
+        +game_window: GameWindow
+        +dungeon: Dungeon
+        +hero: Hero
+        +reset_game()
+        +init_game(settings)
+        +load_game()
+        +handle_menu()
+        +handle_playing()
+        +run()
+    }
+
+    class GameState {
+        <<enumeration>>
+        MENU
+        PLAYING
+        COMBAT
+        GAME_OVER
+        VICTORY
+    }
+
+    class SqliteConfiguration {
+        +db_name: str
+        +open_db()
+        +close_db()
+    }
+
+    class SqliteDungeonConfiguration {
+        +save(dungeon)
+        +load()
+    }
+
+    class SqliteHeroConfiguration {
+        +save(hero)
+        +load()
+    }
+
+    class SqliteMonsterConfiguration {
+        +configure(dungeon)
+    }
+
+    class GameData {
+        +dungeon: Dungeon
+        +hero: Hero
+    }
+
+    DungeonGame --> GameState
+    DungeonGame --> GameMenu
+    DungeonGame --> GameWindow
+    DungeonGame --> Dungeon
+    DungeonGame --> Hero
+    SqliteConfiguration <|-- SqliteDungeonConfiguration
+    SqliteConfiguration <|-- SqliteHeroConfiguration
+    SqliteConfiguration <|-- SqliteMonsterConfiguration
+    SqliteDungeonConfiguration --> GameData

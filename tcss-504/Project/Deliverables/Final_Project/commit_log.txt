@@ -1,0 +1,288 @@
+Commits on Mar 21, 2025
+Merge pull request #10 from chongwongus/prestonharms/sqlite-gae-save
+R3dPnd
+R3dPnd
+authored
+53 minutes ago
+Verified
+Fixed mini-map persistance
+prestonharms-microsoft
+prestonharms-microsoft
+committed
+1 hour ago
+Merge pull request #9 from chongwongus/prestonharms/sqlite-gae-save
+R3dPnd
+R3dPnd
+authored
+7 hours ago
+Verified
+Fixed dragon combat
+prestonharms-microsoft
+prestonharms-microsoft
+committed
+7 hours ago
+Added Save and Load functionality
+prestonharms-microsoft
+prestonharms-microsoft
+committed
+7 hours ago
+
+Commits on Mar 18, 2025
+Merge pull request #8 from chongwongus/prestonharms/sqlite-gae-save
+R3dPnd
+R3dPnd
+authored
+3 days ago
+Verified
+Added save service for dungeon and hero data
+prestonharms-microsoft
+prestonharms-microsoft
+committed
+3 days ago
+
+Commits on Mar 11, 2025
+Merge pull request #7 from chongwongus/prestonharms/sqlite-gae-save
+R3dPnd
+R3dPnd
+authored
+last week
+Verified
+Added game saving service
+prestonharms-microsoft
+prestonharms-microsoft
+committed
+last week
+
+Commits on Mar 5, 2025
+Merge pull request #6 from chongwongus/prestonharms/sqlite_room_config
+R3dPnd
+R3dPnd
+authored
+2 weeks ago
+Verified
+Added squlite fixes
+prestonharms-microsoft
+prestonharms-microsoft
+committed
+2 weeks ago
+
+Commits on Mar 4, 2025
+Added sqlite config to rooms
+prestonharms-microsoft
+prestonharms-microsoft
+committed
+2 weeks ago
+
+Commits on Feb 26, 2025
+added docstring comments to MOST methods and classes
+chongwongus
+chongwongus
+committed
+3 weeks ago
+
+Commits on Feb 25, 2025
+Added combat log to combat UI, implemented fog of war, implemented usable items outside of combat
+chongwongus
+chongwongus
+committed
+3 weeks ago
+
+Commits on Feb 24, 2025
+Created placeholder first person screen
+chongwongus
+chongwongus
+committed
+last month
+Add dungeon and monster configuration classes with tests
+prestonharms-microsoft
+prestonharms-microsoft
+committed
+last month
+Fixing game start menu to be more readable and informative
+chongwongus
+chongwongus
+committed
+last month
+
+Commits on Feb 22, 2025
+Merge pull request #5 from chongwongus/gui-implementation
+chongwongus
+chongwongus
+authored
+last month
+Verified
+
+Commits on Feb 19, 2025
+implemented combat system and cleaned up GUI file architecture
+chongwongus
+chongwongus
+committed
+last month
+
+Commits on Feb 18, 2025
+Merge pull request #4 from chongwongus/prestonharms/loggers
+R3dPnd
+R3dPnd
+authored
+last month
+Verified
+Fixed dungeon traversal, made walls actually work as intended, pillars are displayed correctly on the minimap
+chongwongus
+chongwongus
+committed
+last month
+added GUI with dungeon traversal and event log
+chongwongus
+chongwongus
+committed
+last month
+Added logger
+prestonharms-microsoft
+prestonharms-microsoft
+committed
+last month
+Added metjhod logger
+prestonharms-microsoft
+prestonharms-microsoft
+committed
+last month
+
+Commits on Feb 17, 2025
+added vision properties to hero class
+chongwongus
+chongwongus
+committed
+last month
+dungeon class now contains vision and health pot spawns and includes complete tests
+chongwongus
+chongwongus
+committed
+last month
+Fixed move_hero in dungeon.py and implemented traversal testing
+chongwongus
+chongwongus
+committed
+last month
+fixed move_hero in dungeon.py
+chongwongus
+chongwongus
+committed
+last month
+added 4 helper methods to aid with dungeon traversal in dungeon.py
+chongwongus
+chongwongus
+committed
+on Feb 17
+
+Commits on Feb 14, 2025
+Added AOP Logging for method debugging
+prestonharms-microsoft
+prestonharms-microsoft
+committed
+on Feb 14
+
+Commits on Feb 13, 2025
+added turn based combat, combat menu and testing for turn based combat
+chongwongus
+chongwongus
+committed
+on Feb 13
+
+Commits on Feb 11, 2025
+Merge pull request #3 from chongwongus/prestonharms/sqllite-config
+R3dPnd
+R3dPnd
+authored
+on Feb 11
+Verified
+Merge pull request #2 from chongwongus/prestonharms/sqllite-init
+R3dPnd
+R3dPnd
+authored
+on Feb 11
+Verified
+add dungeon configuration service and SQLite monster configuration
+prestonharms-microsoft
+prestonharms-microsoft
+committed
+on Feb 11
+add configuration classes for dungeon and monsters, and SQLite integration
+prestonharms-microsoft
+prestonharms-microsoft
+committed
+on Feb 11
+Pagination
+
+Commits on Feb 9, 2025
+created combat system with modular methods, and demo
+chongwongus
+chongwongus
+committed
+on Feb 9
+
+Commits on Feb 7, 2025
+fixing combat system, added blocking test
+chongwongus
+chongwongus
+committed
+on Feb 7
+
+Commits on Feb 6, 2025
+added monster generation to rooms, combat system, tests
+chongwongus
+chongwongus
+committed
+on Feb 6
+
+Commits on Feb 4, 2025
+created monster abstract class, monster classes and testing for monsters
+chongwongus
+chongwongus
+committed
+on Feb 4
+added thief class and testing for thief
+chongwongus
+chongwongus
+committed
+on Feb 4
+
+Commits on Jan 30, 2025
+added priestess class, added tests that need to be fixed
+chongwongus
+chongwongus
+committed
+on Jan 30
+added blocking test to combat testing
+chongwongus
+chongwongus
+committed
+on Jan 30
+created character abstract, hero abstract, warrior hero, and created a combat test
+chongwongus
+chongwongus
+committed
+on Jan 30
+created init.py for all directories and ported over dungeon creation logic
+chongwongus
+chongwongus
+committed
+on Jan 30
+
+Commits on Jan 29, 2025
+Initial directory creation
+chongwongus
+chongwongus
+committed
+on Jan 29
+Update README.md
+chongwongus
+chongwongus
+authored
+on Jan 29
+Verified
+Initial commit
+chongwongus
+chongwongus
+authored
+on Jan 29
+Verified

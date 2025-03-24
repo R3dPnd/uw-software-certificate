@@ -1,0 +1,98 @@
+classDiagram
+    %% Character hierarchy
+    class DungeonCharacter {
+        <<abstract>>
+        -_name: str
+        -_max_hp: int
+        -_hp: int
+        -_min_damage: int
+        -_max_damage: int
+        -_attack_speed: int
+        -_hit_chance: float
+        -_curr_location: Tuple~int,int~
+        +name(): str
+        +hp(): int
+        +is_alive(): bool
+        +attack(opponent): Tuple~bool,int~
+        +take_damage(amount): void
+    }
+
+    class Hero {
+        <<abstract>>
+        +class_name: str
+        -_block_chance: float
+        -_healing_potions: int
+        -_vision_potions: int
+        -_pillars_found: List~str~
+        +take_damage(amount): bool
+        +use_healing_potion(): Optional~int~
+        +use_vision_potion(): bool
+        +collect_pillar(pillar_type): void
+        +special_skill(opponent): Tuple~bool,str~
+        +has_all_pillars(): bool
+    }
+
+    class Monster {
+        <<abstract>>
+        +heal_chance: float
+        +min_heal: int
+        +max_heal: int
+        +take_damage(amount): int
+    }
+
+    class Warrior {
+        +__init__(name: str)
+        +special_skill(): "Crushing Blow"
+    }
+
+    class Priestess {
+        +__init__(name: str)
+        +special_skill(): "Healing"
+    }
+
+    class Thief {
+        +__init__(name: str)
+        +special_skill(): "Surprise Attack"
+    }
+
+    class Ogre {
+        "High HP, slow"
+    }
+
+    class Skeleton {
+        "Balanced monster"
+    }
+
+    class Gremlin {
+        "Fast, frequent healing"
+    }
+
+    class Dragon {
+        "Lots of HP, slow attacker"
+    }
+
+    DungeonCharacter <|-- Hero
+    DungeonCharacter <|-- Monster
+    Hero <|-- Warrior
+    Hero <|-- Priestess
+    Hero <|-- Thief
+    Monster <|-- Ogre
+    Monster <|-- Skeleton
+    Monster <|-- Gremlin
+    Monster <|-- Dragon
+
+    class HeroFactory {
+        +create(hero_type, name, hp, etc.): Hero
+    }
+
+    class MonsterFactory {
+        +create_monster(name, hp, etc.): Monster
+    }
+
+    HeroFactory --> Warrior
+    HeroFactory --> Priestess
+    HeroFactory --> Thief
+    MonsterFactory --> Ogre
+    MonsterFactory --> Skeleton
+    MonsterFactory --> Gremlin
+    MonsterFactory --> Dragon

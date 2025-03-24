@@ -1,0 +1,25 @@
+team member names
+    -Preston Harms
+    -Richard logger
+
+breakdown of what each person worked on
+    -Preston Harms: worked on the database integration, the logger, and the dungeon and monster configuration classes
+    -Richard Li: worked on the GUI and the combat system, as well as the event log and dungeon traversal
+
+total hours contributed by each person on project (refer to YouTrack for this information)
+    -Preston Harms: 50 hours
+    -Richard Li: 90 hours
+
+discussion of problems you had to overcome
+    -Preston Harms: had to learn how to integrate the database with the GUI and the logger, as well as how to implement the dungeon and monster configuration classes
+    -Richard Li: had to learn how to implement the combat system and the event log, as well as how to make the GUI more user-friendly
+    -Both: had to learn how to work with the dungeon traversal and the minimap, as well as how to make the walls and pillars display correctly
+
+discussion of shortcomings your project has (if there aren't any state so)
+    -Preston Harms: the database integration is not as smooth as I would like it to be, and the logger could use some more features
+    -Richard Li: the GUI is not as user-friendly as I would like it to be, and the combat system could use some more features
+
+discussion of items you feel should be considered for extra credit on project
+    -Preston Harms: the database integration is a complex task that took a lot of time and effort to implement, and the logger is a useful tool for debugging and tracking events in the game
+    -Richard Li: the GUI is a complex task that took a lot of time and effort to implement, and the combat system is a fun and engaging feature of the game
+    -Both: the dungeon traversal and the minimap are complex tasks that took a lot of time and effort to implement, and the walls and pillars display correctly on the minimap is a useful feature for navigation in the game

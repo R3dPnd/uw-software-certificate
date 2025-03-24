@@ -44,7 +44,25 @@ class Adventurer:
         dagger: Wgt=4, V=60
         jewels: Wgt=2, V=190
         """
-        pass
+        total_carry_weight = sum(item.weight for item in self.inventory)
+        total_carry_value = sum(item.value for item in self.inventory)
+        total_coin_purse_value = sum(value * count for value, count in self.coin_purse.items())
+
+        inventory_str = f"Adventurer (Total Carry Capacity: {self.carry_weight})\n"
+        inventory_str += f"Total Carry Weight: {total_carry_weight}\n"
+        inventory_str += f"Total Carry Value: {total_carry_value}\n"
+        inventory_str += f"Total Coin Purse Value: {total_coin_purse_value}\n\n"
+
+        inventory_str += "== COINS ==\n"
+        for value, name in sorted(Game.COINS.items()):
+            count = self.coin_purse.get(value, 0)
+            inventory_str += f"{name} ({value}): {count}\n"
+
+        inventory_str += "\n== INVENTORY ==\n"
+        for item in self.inventory:
+            inventory_str += f"{item}\n"
+
+        return inventory_str
 
 
 class Chest:
@@ -67,7 +85,7 @@ class Chest:
             tot_wgt += i.weight
             tot_val += i.value
             x += 1
-        return f"Chest: Item Count={X}, Total Value={tot_val}, Total Weight={tot_wgt}\n{ret_str}"
+        return f"Chest: Item Count={x}, Total Value={tot_val}, Total Weight={tot_wgt}\n{ret_str}"
 
     def remove(self, item):
         """
@@ -200,7 +218,10 @@ class Game:
         clothing: Wgt=5, V=43
         dagger: Wgt=4, V=60
         """
-        pass
+        for idx, chest in enumerate(self.chests):
+            print(f"Chest {idx}:")
+            print("= CONTENTS =")
+            print(chest)
 
     def loot_chests(self):
         """
@@ -217,7 +238,26 @@ class Game:
 
         :return: None
         """
-        pass
+        for chest in self.chests:
+            n = len(chest.contents)
+            W = self.player.carry_weight - sum(item.weight for item in self.player.inventory)
+            dp = [[0] * (W + 1) for _ in range(n + 1)]
+
+        for i in range(1, n + 1):
+            item = chest.contents[i - 1]
+            for w in range(W + 1):
+                if item.weight <= w:
+                    dp[i][w] = max(dp[i - 1][w], dp[i - 1][w - item.weight] + item.value)
+                else:
+                    dp[i][w] = dp[i - 1][w]
+
+        w = W
+        for i in range(n, 0, -1):
+            if dp[i][w] != dp[i - 1][w]:
+                item = chest.contents[i - 1]
+                self.player.inventory.append(item)
+                chest.remove(item)
+                w -= item.weight
 
     def sell_items(self):
         """
@@ -233,7 +273,17 @@ class Game:
 
         :return: None
         """
-        pass
+        total_value = sum(item.value for item in self.player.inventory)
+        self.player.inventory.clear()
+
+        for value in sorted(Game.COINS.keys(), reverse=True):
+            count = total_value // value
+            if count > 0:
+                if value in self.player.coin_purse:
+                    self.player.coin_purse[value] += count
+                else:
+                    self.player.coin_purse[value] = count
+                total_value -= value * count
 
 
 if __name__ == "__main__":
@@ -258,7 +308,7 @@ if __name__ == "__main__":
     game.show_chests()
     game.show_player_inventory()
 
-    # THE CAME SHOULD HAVE A METHOD TO TAKE INVENTORY FROM THE PLAYER
+    # THE GAME SHOULD HAVE A METHOD TO TAKE INVENTORY FROM THE PLAYER
     # CONVERT IT INTO PROPER DENOMINATIONS, AND PLACE THAT DATA INTO THE COIN PURSE
     game.sell_items()
 
