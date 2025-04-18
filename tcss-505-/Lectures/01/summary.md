@@ -25,18 +25,18 @@
 
 ### Memory Virtualization
 
-Each process has its own virtual address space.
-The OS maps virtual memory to physical memory.
+* Each process has its own virtual address space.
+* The OS maps virtual memory to physical memory.
 
 ### File System
 
-Provides persistent storage for data.
-OS handles file operations like reading, writing, and managing storage devices.
+* Provides persistent storage for data.
+* OS handles file operations like reading, writing, and managing storage devices.
 
 ### Linux Terminal Basics
 
-Terminal commands are powerful for navigating and managing files.
-Commands like cd, ls, cp, mv, and rm are essential.
+* Terminal commands are powerful for navigating and managing files.
+* Commands like cd, ls, cp, mv, and rm are essential.
 
 ### Assignment 1
 

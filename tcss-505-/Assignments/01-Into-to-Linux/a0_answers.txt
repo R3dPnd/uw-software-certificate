@@ -1,0 +1,63 @@
+Total processes:
+# --------------------------------------------------------------------
+ps -e | wc -l
+26
+
+the ps command lists out the running processes, 
+-e option lists all processes, 
+and wc -l counts the number of lines in the output.
+
+Total threads:# --------------------------------------------------------------------
+ps -eLf | wc -l
+40
+
+the ps command lists out the running threads
+-e option lists all threads 
+the L means list out lightweight process 
+and f means include full formatting, 
+wc -l counts the number of lines in the output.
+
+Linux kernel version:# --------------------------------------------------------------------
+uname -r
+5.15.167.4-microsoft-standard-WSL2
+
+uname command prints system information
+-r option prints the kernel release version.
+
+CPU model name:# --------------------------------------------------------------------
+lscpu | grep Model name
+Model name:                           11th Gen Intel(R) Core(TM) i7-1185G7 @ 3.00GHz
+
+lscpu command lists CPU architecture information
+grep Model name filters the output to show only the model name of the CPU.
+
+Total swap memory (MB):# --------------------------------------------------------------------
+free -m | grep Swap | awk '{print }'
+6144
+
+free command displays memory usage
+-m option shows the output in MB
+grep Swap filters the output to show only the swap memory information
+and awk '{print }' prints the second column which is the total swap memory.
+
+Free disk space on root partition (MB):# --------------------------------------------------------------------
+df -m / | tail -1 | awk '{print }'
+977362
+
+Total nodes on root filesystem:# --------------------------------------------------------------------
+df -i / | tail -1 | awk '{print }'
+67108864
+
+df command displays disk space usage
+-i option shows inode information
+tail -1 gets the last line of the output
+and awk '{print }' prints the second column which is the total number of nodes.
+
+Average RTT to www.google.com (ms):# --------------------------------------------------------------------
+ping -c 10 www.google.com | tail -1 | awk -F '/' '{print }'
+14.955
+
+ping command sends ICMP echo requests to the specified host
+-c 10 option sends 10 packets
+tail -1 gets the last line of the output
+and awk -F '/' '{print }' prints the third field which is the average round-trip time (RTT) in milliseconds.
