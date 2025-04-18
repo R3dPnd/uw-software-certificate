@@ -85,11 +85,11 @@ echo "The output of the ping command is the average round trip time (RTT) of 10 
 # Question 9 - What is the interface name of the network interface device used to route the ICMP ping packets to www.google.com?
 printf "\nQuestion 9 - What is the interface name of the network interface device used to route the ICMP ping packets to www.google.com?" 
 echo "# --------------------------------------------------------------------"
-echo "ip route get www.google.com | awk '/dev/ {print $5}'"
-ip route get www.google.com | awk '/dev/ {print $5}'
-echo the ip command retrieves routing information,      
+echo "ip route get 8.8.8.8 | awk '/dev/ {print $5}'"
+ip route get 8.8.8.8 | awk '/dev/ {print $5}'
+echo the ip command retrieves routing information for the IP address 8.8.8.8 (Google's public DNS server),      
 echo "and awk filters the output to extract the interface name after the 'dev' keyword."
-echo "The output of the ip command is the interface name of the network interface device used to route the ICMP ping packets to www.google.com."
+echo "The output of the ip command is the interface name of the network interface device used to route the ICMP ping packets to 8.8.8.8."
 
 # Question 10 – Identify the file system type of the “/” root partition? Briefly describe this file system type (1-2 sentences).
 printf "\nQuestion 10 - Identify the file system type of the “/” root partition?" 
