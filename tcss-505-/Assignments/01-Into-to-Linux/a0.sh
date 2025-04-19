@@ -11,7 +11,7 @@ done
 
 # Question 1 – How many total processes are present shortly after the Ubuntu VM boots up?
 echo "Question 1 – How many total processes are present shortly after the Ubuntu VM boots up?"
-printf "\# --------------------------------------------------------------------"
+printf "\n# --------------------------------------------------------------------"
 echo "ps -e | wc -l"
 ps -e | wc -l
 if [ "$VERBOSE" = true ]; then
@@ -22,7 +22,7 @@ fi
 
 # Question 2 – How many total threads are present shortly after the Ubuntu VM boots up?
 printf "\nQuestion 2 – How many total threads are present shortly after the Ubuntu VM boots up?" 
-printf "\# --------------------------------------------------------------------"
+printf "\n# --------------------------------------------------------------------"
 echo "ps -eLf | wc -l"
 ps -eLf | wc -l
 if [ "$VERBOSE" = true ]; then
@@ -34,7 +34,7 @@ fi
 
 # Question 3 – What is the version number of the Linux kernel installed on your Ubuntu VM?
 printf "\nQuestion 3 – What is the version number of the Linux kernel installed on your Ubuntu VM?" 
-printf "\# --------------------------------------------------------------------"
+printf "\n# --------------------------------------------------------------------"
 echo "uname -r"
 uname -r
 if [ "$VERBOSE" = true ]; then
@@ -45,7 +45,7 @@ fi
 
 # Question 4 – What is the model name of the CPU(s) of the VM?
 printf "\nQuestion 4 – What is the model name of the CPU(s) of the VM?" 
-printf "\# --------------------------------------------------------------------"
+printf "\n# --------------------------------------------------------------------"
 echo "lscpu | grep "Model name""
 lscpu | grep "Model name"
 if [ "$VERBOSE" = true ]; then
@@ -55,8 +55,8 @@ fi
 
 # Question 5 – What is the total size of the memory swap space (virtual memory) in MB on the VM?
 printf "\nQuestion 5 – What is the total size of the memory swap space (virtual memory) in MB on the VM?" 
-printf "\# --------------------------------------------------------------------"
-printf "free -m | grep "Swap" | awk '{print \$2}'"
+printf "\n# --------------------------------------------------------------------"
+printf "free -m | grep "Swap" | awk '{print $2}'"
 free -m | grep "Swap" | awk '{print $2}'
 if [ "$VERBOSE" = true ]; then
   echo the free command displays memory usage information,
@@ -67,8 +67,8 @@ fi
 
 # Question 6 – What is the free disk space of the root disk partition in MB?
 printf "\nQuestion 6 – What is the free disk space of the root disk partition in MB?" 
-printf "\# --------------------------------------------------------------------"
-printf "df -m / | tail -1 | awk '{print \$4}'"
+printf "\n# --------------------------------------------------------------------"
+printf "df -m / | tail -1 | awk '{print $4}'"
 df -m / | tail -1 | awk '{print $4}'
 if [ "$VERBOSE" = true ]; then
   echo the df command displays disk space usage information,
@@ -79,8 +79,8 @@ fi
 
 # Question 7 – What is the total number of nodes on the root filesystem?
 printf "\nQuestion 7 – What is the total number of nodes on the root filesystem?" 
-printf "\# --------------------------------------------------------------------"
-printf "df -i / | tail -1 | awk '{print \$2}'"
+printf "\n# --------------------------------------------------------------------"
+printf "df -i / | tail -1 | awk '{print $2}'"
 df -i / | tail -1 | awk '{print $2}'
 if [ "$VERBOSE" = true ]; then
   echo the df command displays node usage information,
@@ -91,8 +91,8 @@ fi
 
 # Question 8 – What is the average round trip time (RTT) of 10 ICMP ping packets from your Ubuntu VM to www.google.com?
 printf "\nQuestion 8 – What is the average round trip time (RTT) of 10 ICMP ping packets from your Ubuntu VM to www.google.com?" 
-printf "\# --------------------------------------------------------------------"
-printf "ping -c 10 www.google.com | tail -1 | awk -F '/' '{print \$5}'"
+printf "\n# --------------------------------------------------------------------"
+printf "ping -c 10 www.google.com | tail -1 | awk -F '/' '{print $5}'"
 ping -c 10 www.google.com | tail -1 | awk -F '/' '{print $5}'
 if [ "$VERBOSE" = true ]; then
   echo the ping command sends ICMP echo requests to a specified host,
@@ -103,8 +103,8 @@ fi
 
 # Question 9 - What is the interface name of the network interface device used to route the ICMP ping packets to www.google.com?
 printf "\nQuestion 9 - What is the interface name of the network interface device used to route the ICMP ping packets to www.google.com?" 
-printf "\# --------------------------------------------------------------------"
-printf "ip route get 8.8.8.8 | awk '/dev/ {print \$5}'"
+printf "\n# --------------------------------------------------------------------"
+printf "ip route get 8.8.8.8 | awk '/dev/ {print $5}'"
 ip route get 8.8.8.8 | awk '/dev/ {print $5}'
 if [ "$VERBOSE" = true ]; then
   echo "the ip command retrieves routing information for the IP address 8.8.8.8 Google's public DNS server,"    
@@ -113,8 +113,8 @@ fi
 
 # Question 10 – Identify the file system type of the “/” root partition? Briefly describe this file system type (1-2 sentences).
 printf "\nQuestion 10 - Identify the file system type of the “/” root partition?" 
-printf "\# --------------------------------------------------------------------"
-printf "df -T / | tail -1 | awk '{print \$2}'"
+printf "\n# --------------------------------------------------------------------"
+printf "df -T / | tail -1 | awk '{print $2}'"
 df -T / | tail -1 | awk '{print $2}'
 if [ "$VERBOSE" = true ]; then
   echo the df command displays disk space usage information,
@@ -126,9 +126,9 @@ fi
 
 # BONUS 1 (2 points) Look up 2 Linux commands you are unfamiliar with.
 printf "\nBONUS 1 – Look up 2 Linux commands you are unfamiliar with and provide examples.\n"
-printf "\# --------------------------------------------------------------------"
+printf "\n# --------------------------------------------------------------------"
 
 echo "1. awk - A command-line utility for processing and analyzing text files. It is commonly used for pattern scanning and processing."
-echo "Example: awk '{print $1}' file.txt - This command prints the first column of each line in the file.txt file."
+printf "Example: awk '{print $1}' file.txt - This command prints the first column of each line in the file.txt file."
 echo "2. df - A command-line utility that displays information about disk space usage on file systems."
 echo "Example: df -h - This command displays disk space usage in a human-readable format (e.g., MB, GB)."
