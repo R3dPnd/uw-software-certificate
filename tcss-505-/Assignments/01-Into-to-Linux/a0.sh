@@ -113,7 +113,7 @@ echo "# --------------------------------------------------------------------"
 echo "ip route get 8.8.8.8 | awk '/dev/ {print $5}'"
 ip route get 8.8.8.8 | awk '/dev/ {print $5}'
 if [ "$VERBOSE" = true ]; then
-  echo the ip command retrieves routing information for the IP address 8.8.8.8 (Google's public DNS server),      
+  echo the ip command retrieves routing information for the IP address 8.8.8.8 Google's public DNS server,      
   echo "and awk filters the output to extract the interface name after the 'dev' keyword."
   echo "The output of the ip command is the interface name of the network interface device used to route the ICMP ping packets to 8.8.8.8."
 fi
