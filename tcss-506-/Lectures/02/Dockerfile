@@ -8,6 +8,8 @@ WORKDIR /app
 COPY app.py /app
 COPY templates /app/templates
 
+# Copy the React build directory into the container
+COPY build /app/build
 # Install Flask and any required dependencies
 RUN pip install --no-cache-dir flask
 
