@@ -6,6 +6,7 @@ WORKDIR /app
 
 # Copy the Flask application into the container
 COPY app.py /app
+COPY templates /app/templates
 
 # Install Flask and any required dependencies
 RUN pip install --no-cache-dir flask

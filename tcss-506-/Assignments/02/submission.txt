@@ -1,0 +1,8 @@
+The DockerHub image link (e.g., yourdockerhubusername/flask-image:latest).
+https://hub.docker.com/repository/docker/r3dpnd/flask-your-name
+
+The public IP address of your EC2 instance.
+http://54.92.213.203/
+
+A link to your GitHub repository containing the Dockerfile and Flask application.
+https://github.com/R3dPnd/tcss-506-assignment-02-hello-world-flask-api

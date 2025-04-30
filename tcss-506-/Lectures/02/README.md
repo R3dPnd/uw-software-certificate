@@ -9,6 +9,9 @@
 
 ## Docker
 
+* docker build -t r3dpnd/jina-flask-image:latest .
+* 
+
 ## Flask
 
 ## Demo
