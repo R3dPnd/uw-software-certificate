@@ -1,7 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
+import { fetchDateTime } from './services/date-time';
 
 function App() {
+  var date = fetchDateTime();
   return (
     <div className="App">
       <header className="App-header">
@@ -16,6 +18,7 @@ function App() {
           rel="noopener noreferrer"
         >
           Learn React
+          {date}
         </a>
       </header>
     </div>
