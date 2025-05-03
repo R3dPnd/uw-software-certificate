@@ -3,9 +3,6 @@
 # Make the Python script executable
 chmod +x a1_armstrong.py
 
-# Create a results file
-echo "Processes,Runtime (ms)" > benchmark_results.csv
-
 # Run the program with 1 to 10 processes
 for i in {1..10}
 do
