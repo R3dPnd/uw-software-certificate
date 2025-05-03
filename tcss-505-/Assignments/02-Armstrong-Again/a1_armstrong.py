@@ -98,7 +98,7 @@ def main():
     # Calculate and print runtime
     end_time = time.time()
     runtime = (end_time - start_time) * 1000  # Convert to milliseconds
-    print(f"\It took {runtime:.2f} milliseconds to complete the task")
+    print(f"It took {runtime:.2f} milliseconds to complete the task")
 
     print(f"Armstrong numbers found: {str(all_armstrong_numbers).strip('[]')}")
 
