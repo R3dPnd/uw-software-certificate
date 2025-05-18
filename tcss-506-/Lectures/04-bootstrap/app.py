@@ -1,4 +1,4 @@
-from flask import Flask,request, Response, send_from_directory
+from flask import Flask, render_template,request, Response, send_from_directory
 from datetime import datetime
 
 app = Flask(__name__, static_folder='build')
@@ -38,9 +38,9 @@ def view_log():
 
 # Serve React static files
 @app.route('/')
-def serve_react():
-    log_message(app.static_folder)
-    return send_from_directory(app.static_folder, 'index.html')
+def landing():
+    log_message("/")
+    return render_template('landing.html')
 
 # Serve other static files (e.g., JS, CSS)
 @app.route('/<path:path>')

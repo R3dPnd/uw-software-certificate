@@ -1,7 +1,7 @@
-from flask import Flask,request, Response, send_from_directory
+from flask import Flask, request, Response, render_template
 from datetime import datetime
 
-app = Flask(__name__, static_folder='build')
+app = Flask(__name__)
 
 # Log file path
 LOG_FILE = "app.log"
@@ -36,17 +36,11 @@ def view_log():
     except FileNotFoundError:
         return "Log file not found. No logs available yet."
 
-# Serve React static files
+# Endpoint: /
 @app.route('/')
-def serve_react():
-    log_message(app.static_folder)
-    return send_from_directory(app.static_folder, 'index.html')
-
-# Serve other static files (e.g., JS, CSS)
-@app.route('/<path:path>')
-def serve_static(path):
-    return send_from_directory(app.static_folder, path)
-
+def landing():
+    log_message("/")
+    return render_template('landing.html')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=4000)
+    app.run(host='0.0.0.0', port=4000) 
